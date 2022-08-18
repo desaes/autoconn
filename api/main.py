@@ -1,18 +1,20 @@
 from fastapi import FastAPI
-from config import aranda_conf
+from config import Config
+import threading
 
-
+config = Config()
+lock = threading.RLock()
 
 app = FastAPI()
 
 
 @app.get('/')
 async def raiz():
-    return {"msg": aranda_conf.Instance01.MainEndpoint}
+    return {"msg": "xpto"}
 
-@app.get('/api/v1/aranda/projects')
-async def projects() -> None:
-    return {"msg": "cfg"}
+@app.get('/api/v1/aranda/{instance}/projects')
+async def projects(instance: str):
+    return {"endpoint": f"{config.get_config()['itsm']['aranda'][instance]}"}
     
 
 
