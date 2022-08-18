@@ -19,3 +19,6 @@ class Config:
 
     def get_config(self) -> dict:
         return self.__config
+
+config = Config()
+print(config.get_config())
