@@ -7,10 +7,10 @@ class Config:
         self.__config: dict = {}
         self.read_files()
 
-    def read_files(self,config_path: str=os.getcwd()+'/conf/target/') -> None:
+    def read_files(self,config_path: str=os.getcwd()+'/configs/target/') -> None:
         for filename in glob.iglob(config_path + '**/*.yaml', recursive=True):
             (type, object) = (filename.split('/')[-2],filename.split('/')[-1].split('.')[0])
-            with initialize(version_base=None, config_path=f'../conf/target/{type}'):
+            with initialize(version_base=None, config_path=f'../configs/target/{type}'):
                 if not type in self.__config:
                     self.__config[type] = {} 
                 if not object in self.__config[type]:
